@@ -1,0 +1,6 @@
+@import url('login.css');
+
+/* Register-specific adjustments if any */
+.auth-card {
+    max-width: 500px; /* Slightly wider for longer registration fields */
+}

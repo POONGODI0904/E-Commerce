@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApexStore | Premium E-Commerce Website</title>
+    <!-- Meta Descriptions -->
+    <meta name="description" content="Discover premium activewear, electronics, home decorations, and lifestyle accessories. Shop the latest collections at ApexStore with fast shipping.">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- PAGE PRELOADER -->
+    <div id="page-loader" class="page-loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- GLOBAL GLASS HEADER NAVBAR -->
+    <header class="header">
+        <div class="container navbar">
+            <!-- Brand Logo -->
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt"></i> APEXSTORE
+             </a>  
+        
+            
+            <!-- Desktop Menu Links -->
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="shop.html" class="nav-link">Shop</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="nav-actions">
+                <!-- Theme Mode Toggle -->
+                <button id="theme-toggle" class="action-btn" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <!-- Search Button -->
+                <button id="search-btn" class="action-btn" title="Search Products">
+                    <i class="fas fa-search"></i>
+                </button>
+                <!-- Wishlist Link -->
+                <a href="dashboard.html?tab=wishlist" class="action-btn" title="Wishlist">
+                    <i class="far fa-heart"></i>
+                    <span id="wishlist-badge" class="badge-count" style="display: none;">0</span>
+                </a>
+                <!-- Cart Link -->
+                <a href="cart.html" class="action-btn" title="Cart Bag">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="cart-badge" class="badge-count" style="display: none;">0</span>
+                </a>
+                <!-- User Profile Link -->
+                <a href="login.html" id="profile-btn" class="action-btn" title="User Account">
+                    <i class="far fa-user"></i>
+                </a>
+                <!-- Mobile Navigation Toggle -->
+                <button id="menu-toggle" class="action-btn menu-toggle" title="Open Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION SIDEBAR DRAWER -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt"></i> APEXSTORE
+            </a>
+            <button id="drawer-close" class="drawer-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="drawer-menu">
+            <a href="index.html" class="drawer-link active">Home</a>
+            <a href="shop.html" class="drawer-link">Shop</a>
+            <a href="about.html" class="drawer-link">About Us</a>
+            <a href="contact.html" class="drawer-link">Contact</a>
+            <hr style="border-color: var(--border-color); margin: 0.5rem 0;">
+            <a href="dashboard.html" class="drawer-link">My Dashboard</a>
+            <a href="cart.html" class="drawer-link">Shopping Cart</a>
+        </div>
+    </div>
+
+    <!-- GLOBAL SEARCH OVERLAY POPUP -->
+    <div id="search-overlay" class="search-overlay">
+        <div class="search-container">
+            <div class="search-bar-input-wrapper">
+                <input type="text" id="search-input" placeholder="Search for items, categories, brands..." autocomplete="off">
+                <i class="fas fa-times close-search" id="close-search"></i>
+            </div>
+            <!-- Dynamic search suggestions grid -->
+            <div id="search-suggestions" class="search-suggestions"></div>
+        </div>
+    </div>
+
+    <!-- HERO SLIDER SECTION -->
+    <section class="hero-slider-section" id="hero-slider">
+        <div class="slider-wrapper">
+            <!-- Slide 1 -->
+            <div class="slide active">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1484704849700-f032a568e944?w=1600&auto=format&fit=crop&q=80');"></div>
+                <div class="container">
+                    <div class="slide-content">
+                        <span class="badge badge-primary">New Launch</span>
+                        <h1>Acoustic Excellence Reimagined</h1>
+                        <p>Experience studio-quality sound tuning with active hybrid ANC and ultra-plush comfort. Up to 40 hours of battery life on a single charge.</p>
+                        <div class="slide-btns">
+                            <a href="product.html?id=p1" class="btn btn-primary">Discover More</a>
+                            <a href="shop.html" class="btn btn-secondary">Shop Catalog</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef?w=1600&auto=format&fit=crop&q=80');"></div>
+                <div class="container">
+                    <div class="slide-content">
+                        <span class="badge badge-danger">Hot Deal</span>
+                        <h1>Timeless Leather Apparel</h1>
+                        <p>Discover rugged, custom-tailored leather jackets handmade from premium top-grain cowhide. A durable statement piece designed to age beautifully.</p>
+                        <div class="slide-btns">
+                            <a href="product.html?id=p2" class="btn btn-primary">Shop Apparel</a>
+                            <a href="shop.html" class="btn btn-secondary">Browse Sales</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=1600&auto=format&fit=crop&q=80');"></div>
+                <div class="container">
+                    <div class="slide-content">
+                        <span class="badge badge-success">Smart Tech</span>
+                        <h1>Your Vitals. On Your Wrist.</h1>
+                        <p>A beautiful AMOLED display packed with dual-band GPS, SpO2 blood trackers, smart notification alerts, and up to a 7-day battery profile.</p>
+                        <div class="slide-btns">
+                            <a href="product.html?id=p3" class="btn btn-primary">Explore Chronos</a>
+                            <a href="shop.html" class="btn btn-secondary">Browse Tech</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Arrows -->
+        <button class="slider-arrow prev-slide" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-arrow next-slide" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
+        <!-- Dots -->
+        <div class="slider-dots"></div>
+    </section>
+
+    <!-- SHOP CATEGORIES DIRECTORY -->
+    <section class="section-padding container">
+        <div class="text-center">
+            <h2 class="section-title">Shop by Categories</h2>
+            <p class="section-subtitle">Find premium quality items catered to your daily tasks, fashion aesthetics, and workspace hubs.</p>
+        </div>
+        <div class="categories-grid">
+            <a href="shop.html?category=Electronics" class="category-card">
+                <div class="category-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>Electronics</h3>
+            </a>
+            <a href="shop.html?category=Fashion" class="category-card">
+                <div class="category-icon"><i class="fas fa-tshirt"></i></div>
+                <h3>Fashion</h3>
+            </a>
+            <a href="shop.html?category=Home%20%26%20Kitchen" class="category-card">
+                <div class="category-icon"><i class="fas fa-couch"></i></div>
+                <h3>Home & Living</h3>
+            </a>
+            <a href="shop.html?category=Accessories" class="category-card">
+                <div class="category-icon"><i class="fas fa-wallet"></i></div>
+                <h3>Accessories</h3>
+            </a>
+        </div>
+    </section>
+
+    <!-- DYNAMIC FEATURED PRODUCTS SECTION -->
+    <section class="section-padding bg-tertiary" style="background-color: var(--bg-tertiary); transition: background-color var(--transition-normal);">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Featured Products</h2>
+                <p class="section-subtitle">Explore our most popular, high-rating items chosen by the Apex community.</p>
+            </div>
+            
+            <div id="featured-products-grid" class="products-grid">
+                <!-- Rendered dynamically by javascript -->
+            </div>
+
+            <div class="text-center" style="margin-top: 3.5rem;">
+                <a href="shop.html" class="btn btn-primary">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPECIAL OFFER CAMPAIGN BANNERS -->
+    <section class="section-padding container">
+        <div class="banners-grid">
+            <!-- Banner 1 -->
+            <div class="offer-banner">
+                <div class="offer-bg" style="background-image: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80');"></div>
+                <div class="offer-content">
+                    <span class="badge badge-danger">Limited Offer</span>
+                    <h3>Performance Runners</h3>
+                    <p>Upgrade your training with 25% off knit running sneakers.</p>
+                    <a href="product.html?id=p9" class="btn btn-dark btn-sm">Shop Now</a>
+                </div>
+            </div>
+            <!-- Banner 2 -->
+            <div class="offer-banner">
+                <div class="offer-bg" style="background-image: url('https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop&q=80');"></div>
+                <div class="offer-content">
+                    <span class="badge badge-primary">Adventure Gear</span>
+                    <h3>Apex Outdoors</h3>
+                    <p>Waterproof ballistic packs ready for your next outdoor summit.</p>
+                    <a href="product.html?id=p5" class="btn btn-dark btn-sm">Get Apex Pack</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BUSINESS VALUE FEATURES GRID -->
+    <section class="container" style="margin-bottom: 5rem;">
+        <div class="features-grid">
+            <div class="feature-box">
+                <i class="fas fa-truck-moving"></i>
+                <h3>Free Logistics</h3>
+                <p>Enjoy free global express shipping on all orders exceeding $150.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-shield-halved"></i>
+                <h3>Secure Transactions</h3>
+                <p>Shop comfortably with 256-bit encrypted merchant payment systems.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-headset"></i>
+                <h3>Dedicated Support</h3>
+                <p>Our helpdesk and chat teams are available 24/7 for you.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-rotate-left"></i>
+                <h3>30-Day Refunds</h3>
+                <p>Change your mind? Send it back within 30 days, no questions asked.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUSTOMER REVIEWS / TESTIMONIALS -->
+    <section class="section-padding bg-tertiary" style="background-color: var(--bg-tertiary); transition: background-color var(--transition-normal);">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <p class="section-subtitle">Real experiences shared by customers enjoying premium gear worldwide.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The premium headphones are amazing. Active Noise Cancellation blocks out the subway chatter completely. Will buy more stuff soon!"</p>
+                    <div class="testimonial-profile">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80" alt="Sarah">
+                        <div class="profile-info">
+                            <h4>Sarah Jenkins</h4>
+                            <span>Sound Designer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-stroke"></i>
+                    </div>
+                    <p class="testimonial-text">"Fantastic leather jacket quality. The details are robust and it fits perfectly around the arms. Looking forward to hiking with it."</p>
+                    <div class="testimonial-profile">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Marcus">
+                        <div class="profile-info">
+                            <h4>Marcus Vance</h4>
+                            <span>Outdoor Blogger</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"I've been wearing the running shoes for 3 weeks and they provide amazing shock reduction. Plus, the minimal look matches smart wear."</p>
+                    <div class="testimonial-profile">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" alt="Emily">
+                        <div class="profile-info">
+                            <h4>Emily Watson</h4>
+                            <span>Athletic Trainer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREMIUM GRID FOOTER -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom: 1.5rem; display: inline-block;">
+                    <i class="fas fa-bolt"></i> APEXSTORE
+                </a>
+                <p>Delivering high-end, visual, and high-performance lifestyle goods since 2026. Built with precision and aesthetic simplicity.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Nav</h3>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="shop.html">Shop Catalog</a>
+                    <a href="about.html">About Brand</a>
+                    <a href="contact.html">Contact Us</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Care</h3>
+                <div class="footer-links">
+                    <a href="dashboard.html">My Account</a>
+                    <a href="cart.html">Shopping Cart</a>
+                    <a href="about.html">Terms & Conditions</a>
+                    <a href="contact.html">Help Desk</a>
+                </div>
+            </div>
+            <div class="footer-column footer-newsletter">
+                <h3>Subscribe</h3>
+                <p>Receive exclusive alerts on discounts, seasonal collections, and technology drops.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 ApexStore Inc. Designed with premium assets. All rights reserved.</p>
+            <div class="payment-methods">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-paypal"></i>
+                <i class="fab fa-cc-apple-pay"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT REGISTRATIONS -->
+    <script src="js/products.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/slider.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- PAGE-SPECIFIC RENDER LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const featuredContainer = document.getElementById('featured-products-grid');
+            if (!featuredContainer) return;
+
+            // Fetch only featured products
+            const featuredList = getAllProducts().filter(p => p.featured).slice(0, 4);
+
+            const renderFeatured = () => {
+                featuredContainer.innerHTML = featuredList.map(p => {
+                    const isWishlisted = Wishlist.hasItem(p.id);
+                    const heartIcon = isWishlisted ? 'fas fa-heart' : 'far fa-heart';
+                    const wishlistClass = isWishlisted ? 'active' : '';
+                    
+                    return `
+                        <div class="product-card">
+                            <div class="product-img-wrapper">
+                                <a href="product.html?id=${p.id}">
+                                    <img src="${p.images[0]}" alt="${p.name}" loading="lazy">
+                                </a>
+                                <span class="product-card-badge badge badge-primary">${p.category}</span>
+                                <button class="product-wishlist-btn ${wishlistClass}" data-id="${p.id}" title="Add to Wishlist">
+                                    <i class="${heartIcon}"></i>
+                                </button>
+                            </div>
+                            <div class="product-card-content">
+                                <span class="product-card-category">${p.category}</span>
+                                <a href="product.html?id=${p.id}">
+                                    <h3 class="product-card-title">${p.name}</h3>
+                                </a>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(${p.reviewsCount})</span>
+                                </div>
+                                <div class="product-card-bottom">
+                                    <span class="product-card-price">$${p.price.toFixed(2)}</span>
+                                    <button class="product-add-cart-btn" data-id="${p.id}" title="Add to Cart">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                // Re-bind actions
+                bindProductActions();
+            };
+
+            const bindProductActions = () => {
+                // Add to Cart
+                const cartBtns = featuredContainer.querySelectorAll('.product-add-cart-btn');
+                cartBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = btn.getAttribute('data-id');
+                        Cart.addItem(id, 1);
+                    });
+                });
+
+                // Wishlist Toggle
+                const wishlistBtns = featuredContainer.querySelectorAll('.product-wishlist-btn');
+                wishlistBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = btn.getAttribute('data-id');
+                        const isAdded = Wishlist.toggleItem(id);
+                        const icon = btn.querySelector('i');
+                        if (isAdded) {
+                            btn.classList.add('active');
+                            icon.className = 'fas fa-heart';
+                        } else {
+                            btn.classList.remove('active');
+                            icon.className = 'far fa-heart';
+                        }
+                    });
+                });
+            };
+
+            // Listen to updates from wishlist module
+            window.addEventListener('wishlistUpdated', renderFeatured);
+            
+            renderFeatured();
+        });
+    </script>
+</body>
+</html>

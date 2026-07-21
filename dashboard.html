@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard | ApexStore</title>
+    <meta name="description" content="Manage your account profile, review recent purchases, trace order details, and check your saved wishlist items.">
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- PAGE PRELOADER -->
+    <div id="page-loader" class="page-loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- GLOBAL GLASS HEADER NAVBAR -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt"></i> APEXSTORE
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="shop.html" class="nav-link">Shop</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button id="theme-toggle" class="action-btn" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="search-btn" class="action-btn" title="Search Products">
+                    <i class="fas fa-search"></i>
+                </button>
+                <a href="dashboard.html?tab=wishlist" class="action-btn" title="Wishlist">
+                    <i class="far fa-heart"></i>
+                    <span id="wishlist-badge" class="badge-count" style="display: none;">0</span>
+                </a>
+                <a href="cart.html" class="action-btn" title="Cart Bag">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="cart-badge" class="badge-count" style="display: none;">0</span>
+                </a>
+                <a href="login.html" id="profile-btn" class="action-btn" title="User Account">
+                    <i class="far fa-user"></i>
+                </a>
+                <button id="menu-toggle" class="action-btn menu-toggle" title="Open Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt"></i> APEXSTORE
+            </a>
+            <button id="drawer-close" class="drawer-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="drawer-menu">
+            <a href="index.html" class="drawer-link">Home</a>
+            <a href="shop.html" class="drawer-link">Shop</a>
+            <a href="about.html" class="drawer-link">About Us</a>
+            <a href="contact.html" class="drawer-link">Contact</a>
+            <hr style="border-color: var(--border-color); margin: 0.5rem 0;">
+            <a href="dashboard.html" class="drawer-link active">My Dashboard</a>
+            <a href="cart.html" class="drawer-link">Shopping Cart</a>
+        </div>
+    </div>
+
+    <!-- GLOBAL SEARCH OVERLAY POPUP -->
+    <div id="search-overlay" class="search-overlay">
+        <div class="search-container">
+            <div class="search-bar-input-wrapper">
+                <input type="text" id="search-input" placeholder="Search for items, categories, brands..." autocomplete="off">
+                <i class="fas fa-times close-search" id="close-search"></i>
+            </div>
+            <div id="search-suggestions" class="search-suggestions"></div>
+        </div>
+    </div>
+
+    <!-- BREADCRUMB AREA -->
+    <section class="breadcrumb-area">
+        <div class="container">
+            <h1>Account Dashboard</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a>
+                <span class="separator"><i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i></span>
+                <span class="current">My Dashboard</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main class="container dashboard-layout">
+        <!-- Sidebar controls -->
+        <aside class="dashboard-sidebar">
+            <div class="profile-card">
+                <div class="profile-avatar" id="user-avatar-letters">U</div>
+                <h4 class="profile-name" id="user-display-name">Username</h4>
+                <span class="profile-email" id="user-display-email">user@example.com</span>
+            </div>
+            <nav class="dashboard-tabs">
+                <button class="dashboard-tab-btn active" data-pane="home"><i class="fas fa-house"></i> Home</button>
+                <button class="dashboard-tab-btn" data-pane="orders"><i class="fas fa-receipt"></i> My Orders</button>
+                <button class="dashboard-tab-btn" data-pane="wishlist"><i class="fas fa-heart"></i> Wishlist</button>
+                <button class="dashboard-tab-btn" data-pane="profile"><i class="fas fa-user-gear"></i> Settings</button>
+                <a href="login.html?action=logout" class="dashboard-tab-btn logout-tab"><i class="fas fa-power-off"></i> Log Out</a>
+            </nav>
+        </aside>
+
+        <!-- Right Side Panes Content -->
+        <section class="dashboard-content-panel">
+            <!-- Pane 1: Overview Pane -->
+            <div class="panel-pane active" id="pane-home">
+                <h2 class="panel-title">Overview Summary</h2>
+                
+                <!-- Stats row -->
+                <div class="stats-cards-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-icon"><i class="fas fa-receipt"></i></div>
+                        <div class="stat-card-info">
+                            <h3 id="stat-orders-count">0</h3>
+                            <span>Orders Placed</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-icon" style="background-color: rgba(239, 68, 68, 0.1); color: var(--accent-danger);"><i class="fas fa-heart"></i></div>
+                        <div class="stat-card-info">
+                            <h3 id="stat-wishlist-count">0</h3>
+                            <span>Saved Items</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-icon" style="background-color: rgba(16, 185, 129, 0.1); color: var(--accent-success);"><i class="fas fa-shopping-bag"></i></div>
+                        <div class="stat-card-info">
+                            <h3 id="stat-cart-count">0</h3>
+                            <span>Cart items</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background-color: var(--bg-primary); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: var(--radius-md);">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem;">Account Notification</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">Welcome to the new dashboard interface! From here, you can trace checkout status updates, check items, or edit passwords.</p>
+                </div>
+            </div>
+
+            <!-- Pane 2: Orders list pane -->
+            <div class="panel-pane" id="pane-orders">
+                <h2 class="panel-title">Recent Purchase History</h2>
+                
+                <div style="overflow-x: auto;">
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>Billing Target</th>
+                                <th>Status</th>
+                                <th>Total cost</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-list-tbody">
+                            <!-- Dynamic rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pane 3: Wishlist items -->
+            <div class="panel-pane" id="pane-wishlist">
+                <h2 class="panel-title">Saved Wishlist Items</h2>
+                <div id="wishlist-products-grid" class="products-grid">
+                    <!-- Dynamic wishlist cards -->
+                </div>
+            </div>
+
+            <!-- Pane 4: Profile Settings -->
+            <div class="panel-pane" id="pane-profile">
+                <h2 class="panel-title">Account Settings</h2>
+                <form id="settings-profile-form">
+                    <div class="form-group">
+                        <label class="form-label" for="profile-name-input">Full Name</label>
+                        <input type="text" id="profile-name-input" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="profile-email-input">Email Address</label>
+                        <input type="email" id="profile-email-input" class="form-input" required disabled style="cursor: not-allowed; opacity: 0.6;">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Save Settings</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- PREMIUM GRID FOOTER -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom: 1.5rem; display: inline-block;">
+                    <i class="fas fa-bolt"></i> APEXSTORE
+                </a>
+                <p>Delivering high-end, visual, and high-performance lifestyle goods since 2026. Built with precision and aesthetic simplicity.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Nav</h3>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="shop.html">Shop Catalog</a>
+                    <a href="about.html">About Brand</a>
+                    <a href="contact.html">Contact Us</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Care</h3>
+                <div class="footer-links">
+                    <a href="dashboard.html">My Account</a>
+                    <a href="cart.html">Shopping Cart</a>
+                    <a href="about.html">Terms & Conditions</a>
+                    <a href="contact.html">Help Desk</a>
+                </div>
+            </div>
+            <div class="footer-column footer-newsletter">
+                <h3>Subscribe</h3>
+                <p>Receive exclusive alerts on discounts, seasonal collections, and technology drops.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 ApexStore Inc. Designed with premium assets. All rights reserved.</p>
+            <div class="payment-methods">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-paypal"></i>
+                <i class="fab fa-cc-apple-pay"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT REGISTRATIONS -->
+    <script src="js/products.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- DASHBOARD RENDERING ROUTINES -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Authentication check
+            const sessionUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!sessionUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Sync user UI details
+            const initialLetters = sessionUser.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+            document.getElementById('user-avatar-letters').textContent = initialLetters;
+            document.getElementById('user-display-name').textContent = sessionUser.name;
+            document.getElementById('user-display-email').textContent = sessionUser.email;
+            document.getElementById('profile-name-input').value = sessionUser.name;
+            document.getElementById('profile-email-input').value = sessionUser.email;
+
+            const tabs = document.querySelectorAll('.dashboard-tab-btn[data-pane]');
+            const panes = document.querySelectorAll('.panel-pane');
+
+            const switchPane = (paneId) => {
+                tabs.forEach(btn => {
+                    if (btn.getAttribute('data-pane') === paneId) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+
+                panes.forEach(pane => {
+                    if (pane.id === `pane-${paneId}`) {
+                        pane.classList.add('active');
+                    } else {
+                        pane.classList.remove('active');
+                    }
+                });
+            };
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const id = tab.getAttribute('data-pane');
+                    switchPane(id);
+                });
+            });
+
+            // Parse optional tab parameters from URLs (e.g. dashboard.html?tab=wishlist)
+            const checkUrlParam = () => {
+                const params = new URLSearchParams(window.location.search);
+                const tabParam = params.get('tab');
+                if (tabParam) {
+                    switchPane(tabParam);
+                }
+            };
+
+            // Calculate overview counters
+            const renderOverviewCounters = () => {
+                const orders = JSON.parse(localStorage.getItem('user_orders') || '[]');
+                document.getElementById('stat-orders-count').textContent = orders.length;
+                document.getElementById('stat-wishlist-count').textContent = Wishlist.getCount();
+                document.getElementById('stat-cart-count').textContent = Cart.getCount();
+            };
+
+            // Render Orders history table
+            const renderOrdersTable = () => {
+                const tbody = document.getElementById('orders-list-tbody');
+                const orders = JSON.parse(localStorage.getItem('user_orders') || '[]');
+
+                if (orders.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted" style="padding: 2.5rem 0;">You have not placed any orders yet.</td></tr>';
+                    return;
+                }
+
+                // Show orders sorted by latest first
+                tbody.innerHTML = orders.reverse().map(order => `
+                    <tr>
+                        <td style="font-weight: 700; color: var(--accent-primary);">${order.orderId}</td>
+                        <td>${order.date}</td>
+                        <td>${order.shippingAddress.name}</td>
+                        <td><span class="status-badge status-processing">${order.status}</span></td>
+                        <td style="font-weight: 700;">$${order.total.toFixed(2)}</td>
+                    </tr>
+                `).join('');
+            };
+
+            // Render Wishlist grid list
+            const wishlistGrid = document.getElementById('wishlist-products-grid');
+            const renderWishlist = () => {
+                const wishItemsIds = Wishlist.items;
+                const wishlistProducts = getAllProducts().filter(p => wishItemsIds.includes(p.id));
+
+                if (wishlistProducts.length === 0) {
+                    wishlistGrid.innerHTML = `
+                        <div style="grid-column: 1 / -1; padding: 3rem 1rem; text-align: center;">
+                            <i class="far fa-heart" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem; display: block;"></i>
+                            <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Wishlist is Empty</h3>
+                            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Save products here while browsing the shop.</p>
+                            <a href="shop.html" class="btn btn-secondary btn-sm">Shop Catalog</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                wishlistGrid.innerHTML = wishlistProducts.map(p => `
+                    <div class="product-card">
+                        <div class="product-img-wrapper">
+                            <a href="product.html?id=${p.id}">
+                                <img src="${p.images[0]}" alt="${p.name}" loading="lazy">
+                            </a>
+                            <span class="product-card-badge badge badge-secondary">${p.category}</span>
+                            <button class="product-wishlist-btn active" data-id="${p.id}" title="Remove from Wishlist">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="product-card-content">
+                            <span class="product-card-category">${p.category}</span>
+                            <a href="product.html?id=${p.id}">
+                                <h3 class="product-card-title">${p.name}</h3>
+                            </a>
+                            <div class="product-card-bottom">
+                                <span class="product-card-price">$${p.price.toFixed(2)}</span>
+                                <button class="product-add-cart-btn" data-id="${p.id}" title="Add to Cart" ${p.inStock ? '' : 'disabled style="cursor: not-allowed; opacity: 0.5;"'}>
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Bind click actions
+                const cartBtns = wishlistGrid.querySelectorAll('.product-add-cart-btn');
+                cartBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = btn.getAttribute('data-id');
+                        Cart.addItem(id, 1);
+                    });
+                });
+
+                const wishlistBtns = wishlistGrid.querySelectorAll('.product-wishlist-btn');
+                wishlistBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = btn.getAttribute('data-id');
+                        Wishlist.toggleItem(id); // removes it
+                    });
+                });
+            };
+
+            // Save Settings
+            const settingsForm = document.getElementById('settings-profile-form');
+            if (settingsForm) {
+                settingsForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const newName = document.getElementById('profile-name-input').value.trim();
+                    if (!newName) return;
+
+                    sessionUser.name = newName;
+                    localStorage.setItem('currentUser', JSON.stringify(sessionUser));
+
+                    // Update registered user entry as well
+                    const users = JSON.parse(localStorage.getItem('registered_users') || '[]');
+                    const idx = users.findIndex(u => u.email.toLowerCase() === sessionUser.email.toLowerCase());
+                    if (idx > -1) {
+                        users[idx].name = newName;
+                        localStorage.setItem('registered_users', JSON.stringify(users));
+                    }
+
+                    // Update letter avatar
+                    const letters = newName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+                    document.getElementById('user-avatar-letters').textContent = letters;
+                    document.getElementById('user-display-name').textContent = newName;
+
+                    Cart.toast('Settings updated successfully!', 'success');
+                });
+            }
+
+            // Sync wishlist deletions
+            window.addEventListener('wishlistUpdated', () => {
+                renderOverviewCounters();
+                renderWishlist();
+            });
+
+            // Initial load calls
+            checkUrlParam();
+            renderOverviewCounters();
+            renderOrdersTable();
+            renderWishlist();
+        });
+    </script>
+</body>
+</html>

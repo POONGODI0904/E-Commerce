@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | ApexStore</title>
+    <meta name="description" content="View detailed specifications, customer reviews, and high-definition galleries of our premium items. Shop at ApexStore today.">
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- PAGE PRELOADER -->
+    <div id="page-loader" class="page-loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- GLOBAL GLASS HEADER NAVBAR -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt"></i> APEXSTORE
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="shop.html" class="nav-link">Shop</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button id="theme-toggle" class="action-btn" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="search-btn" class="action-btn" title="Search Products">
+                    <i class="fas fa-search"></i>
+                </button>
+                <a href="dashboard.html?tab=wishlist" class="action-btn" title="Wishlist">
+                    <i class="far fa-heart"></i>
+                    <span id="wishlist-badge" class="badge-count" style="display: none;">0</span>
+                </a>
+                <a href="cart.html" class="action-btn" title="Cart Bag">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="cart-badge" class="badge-count" style="display: none;">0</span>
+                </a>
+                <a href="login.html" id="profile-btn" class="action-btn" title="User Account">
+                    <i class="far fa-user"></i>
+                </a>
+                <button id="menu-toggle" class="action-btn menu-toggle" title="Open Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt"></i> APEXSTORE
+            </a>
+            <button id="drawer-close" class="drawer-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="drawer-menu">
+            <a href="index.html" class="drawer-link">Home</a>
+            <a href="shop.html" class="drawer-link">Shop</a>
+            <a href="about.html" class="drawer-link">About Us</a>
+            <a href="contact.html" class="drawer-link">Contact</a>
+            <hr style="border-color: var(--border-color); margin: 0.5rem 0;">
+            <a href="dashboard.html" class="drawer-link">My Dashboard</a>
+            <a href="cart.html" class="drawer-link">Shopping Cart</a>
+        </div>
+    </div>
+
+    <!-- GLOBAL SEARCH OVERLAY POPUP -->
+    <div id="search-overlay" class="search-overlay">
+        <div class="search-container">
+            <div class="search-bar-input-wrapper">
+                <input type="text" id="search-input" placeholder="Search for items, categories, brands..." autocomplete="off">
+                <i class="fas fa-times close-search" id="close-search"></i>
+            </div>
+            <div id="search-suggestions" class="search-suggestions"></div>
+        </div>
+    </div>
+
+    <!-- BREADCRUMB AREA -->
+    <section class="breadcrumb-area">
+        <div class="container">
+            <h1 id="product-breadcrumb-title">Product Details</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a>
+                <span class="separator"><i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i></span>
+                <a href="shop.html">Shop</a>
+                <span class="separator"><i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i></span>
+                <span class="current" id="product-current-breadcrumb">Details</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT DETAIL CONTAINER -->
+    <main class="container">
+        <div class="product-detail-grid" id="product-detail-layout">
+            <!-- Left Side: Image Gallery -->
+            <div class="gallery-container">
+                <div class="main-preview-wrapper">
+                    <img id="main-preview-img" src="" alt="Product Preview">
+                </div>
+                <div class="thumbnails-list" id="thumbnails-list-div">
+                    <!-- Rendered dynamically -->
+                </div>
+            </div>
+
+            <!-- Right Side: Details Panel -->
+            <div class="info-container">
+                <span id="detail-badge-cat" class="badge badge-primary" style="width: fit-content; margin-bottom: 1rem;"></span>
+                <h1 class="info-title" id="detail-title">Loading Product...</h1>
+                
+                <div class="info-meta">
+                    <div class="product-rating" id="detail-rating">
+                        <!-- Stars dynamic -->
+                    </div>
+                    <span style="color: var(--text-muted);">|</span>
+                    <span style="font-size: 0.9rem; color: var(--text-secondary);"><b id="detail-reviews-num">0</b> Customer Reviews</span>
+                    <span style="color: var(--text-muted);">|</span>
+                    <span id="detail-stock-status"></span>
+                </div>
+
+                <div class="info-price-block">
+                    <span class="info-price" id="detail-price">$0.00</span>
+                    <span class="info-old-price" id="detail-old-price"></span>
+                </div>
+
+                <p class="info-description" id="detail-description"></p>
+
+                <!-- Product Buying Modifiers -->
+                <div class="product-options">
+                    <!-- Color bubbles (if applicable) -->
+                    <div class="option-group">
+                        <span class="option-label">Select Color</span>
+                        <div class="color-bubbles" id="color-bubbles-div">
+                            <div class="color-bubble active">
+                                <span style="background-color: #1e293b;"></span>
+                            </div>
+                            <div class="color-bubble">
+                                <span style="background-color: #cbd5e1;"></span>
+                            </div>
+                            <div class="color-bubble">
+                                <span style="background-color: #6366f1;"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quantity Block -->
+                    <div class="option-group" style="margin-top: 1.5rem;">
+                        <span class="option-label">Quantity</span>
+                        <div class="qty-actions-block">
+                            <div class="qty-counter">
+                                <button class="qty-btn" id="qty-dec"><i class="fas fa-minus"></i></button>
+                                <input type="text" class="qty-input" id="qty-val" value="1" readonly>
+                                <button class="qty-btn" id="qty-inc"><i class="fas fa-plus"></i></button>
+                            </div>
+                            
+                            <!-- Wishlist button -->
+                            <button id="detail-wishlist-btn" class="btn-icon" title="Add to Wishlist" style="width: 44px; height: 44px; border-radius: var(--radius-md);">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Purchase Buttons -->
+                <div class="buy-buttons">
+                    <button class="btn btn-secondary" id="detail-add-cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    <button class="btn btn-primary" id="detail-buy-now-btn">Buy It Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABS CONTAINER (SPECIFICATIONS / REVIEWS) -->
+        <div class="tabs-container">
+            <div class="tabs-header">
+                <button class="tab-btn active" data-tab="specs">Specifications</button>
+                <button class="tab-btn" data-tab="reviews">Reviews (<span id="tab-reviews-count">0</span>)</button>
+            </div>
+            
+            <!-- Specs Tab Content -->
+            <div class="tab-pane active" id="tab-specs">
+                <table class="specs-table" id="specs-table-body">
+                    <!-- Dynamic specifications -->
+                </table>
+            </div>
+
+            <!-- Reviews Tab Content -->
+            <div class="tab-pane" id="tab-reviews">
+                <div class="reviews-summary">
+                    <div class="reviews-score">
+                        <h2 id="rating-score-num">0.0</h2>
+                        <div class="product-rating" style="justify-content: center; margin-bottom: 0.5rem;" id="rating-score-stars"></div>
+                        <span style="font-size: 0.9rem; color: var(--text-secondary);">Overall Rating</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; justify-content: center; gap: 0.5rem;">
+                        <span style="font-weight: 600;">Customer Feedback rating:</span>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">Verified buyer assessments collected from our customer community checkout logs.</p>
+                    </div>
+                </div>
+                
+                <div class="reviews-list-wrapper" id="reviews-list-div">
+                    <!-- Dynamic review cards -->
+                </div>
+            </div>
+        </div>
+
+        <!-- RELATED PRODUCTS SECTION -->
+        <section class="section-padding" style="border-top: 1px solid var(--border-color);">
+            <div class="text-center">
+                <h2 class="section-title">Related Products</h2>
+                <p class="section-subtitle">Customers looking at this item also considered these category options.</p>
+            </div>
+            <div id="related-products-grid" class="products-grid">
+                <!-- Dynamic cards -->
+            </div>
+        </section>
+    </main>
+
+    <!-- PREMIUM GRID FOOTER -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom: 1.5rem; display: inline-block;">
+                    <i class="fas fa-bolt"></i> APEXSTORE
+                </a>
+                <p>Delivering high-end, visual, and high-performance lifestyle goods since 2026. Built with precision and aesthetic simplicity.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Nav</h3>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="shop.html">Shop Catalog</a>
+                    <a href="about.html">About Brand</a>
+                    <a href="contact.html">Contact Us</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Care</h3>
+                <div class="footer-links">
+                    <a href="dashboard.html">My Account</a>
+                    <a href="cart.html">Shopping Cart</a>
+                    <a href="about.html">Terms & Conditions</a>
+                    <a href="contact.html">Help Desk</a>
+                </div>
+            </div>
+            <div class="footer-column footer-newsletter">
+                <h3>Subscribe</h3>
+                <p>Receive exclusive alerts on discounts, seasonal collections, and technology drops.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 ApexStore Inc. Designed with premium assets. All rights reserved.</p>
+            <div class="payment-methods">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-paypal"></i>
+                <i class="fab fa-cc-apple-pay"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT REGISTRATIONS -->
+    <script src="js/products.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- PRODUCT DETAIL RENDER ENGINE -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get('id') || 'p1';
+            
+            const product = getProductById(productId);
+            if (!product) {
+                document.getElementById('product-detail-layout').innerHTML = `
+                    <div style="grid-column: 1 / -1; padding: 5rem 0; text-align: center;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--accent-danger); margin-bottom: 1.5rem;"></i>
+                        <h2>Product Not Found</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 2rem;">The product you are trying to view does not exist in our catalog database.</p>
+                        <a href="shop.html" class="btn btn-primary">Return to Shop</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Bind metadata details
+            document.getElementById('product-breadcrumb-title').textContent = product.name;
+            document.getElementById('product-current-breadcrumb').textContent = product.name;
+            document.getElementById('detail-title').textContent = product.name;
+            document.getElementById('detail-description').textContent = product.description;
+            document.getElementById('detail-price').textContent = `$${product.price.toFixed(2)}`;
+            
+            const oldPriceEl = document.getElementById('detail-old-price');
+            const originalPrice = product.price * 1.25; // 25% mock markup
+            oldPriceEl.textContent = `$${originalPrice.toFixed(2)}`;
+
+            // Category badge
+            const catBadge = document.getElementById('detail-badge-cat');
+            catBadge.textContent = product.category;
+
+            // Stock Status
+            const stockStatus = document.getElementById('detail-stock-status');
+            if (product.inStock) {
+                stockStatus.innerHTML = '<span class="badge badge-success">In Stock</span>';
+            } else {
+                stockStatus.innerHTML = '<span class="badge badge-danger">Out of Stock</span>';
+                document.getElementById('detail-add-cart-btn').disabled = true;
+                document.getElementById('detail-add-cart-btn').style.opacity = 0.5;
+                document.getElementById('detail-buy-now-btn').disabled = true;
+                document.getElementById('detail-buy-now-btn').style.opacity = 0.5;
+            }
+
+            // Reviews counts
+            document.getElementById('detail-reviews-num').textContent = product.reviewsCount;
+            document.getElementById('tab-reviews-count').textContent = product.reviewsCount;
+            document.getElementById('rating-score-num').textContent = product.rating.toFixed(1);
+
+            // Stars rating mapping
+            const makeStarsHTML = (rate) => {
+                const rounded = Math.round(rate * 2) / 2;
+                let html = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= rounded) {
+                        html += '<i class="fas fa-star"></i>';
+                    } else if (i - 0.5 === rounded) {
+                        html += '<i class="fas fa-star-half-stroke"></i>';
+                    } else {
+                        html += '<i class="far fa-star"></i>';
+                    }
+                }
+                return html;
+            };
+
+            document.getElementById('detail-rating').innerHTML = makeStarsHTML(product.rating) + `<span>(${product.rating})</span>`;
+            document.getElementById('rating-score-stars').innerHTML = makeStarsHTML(product.rating);
+
+            // Set images gallery
+            const mainImg = document.getElementById('main-preview-img');
+            mainImg.src = product.images[0];
+            mainImg.alt = product.name;
+
+            const thumbsDiv = document.getElementById('thumbnails-list-div');
+            thumbsDiv.innerHTML = product.images.map((img, idx) => `
+                <div class="thumb-item ${idx === 0 ? 'active' : ''}" data-src="${img}">
+                    <img src="${img}" alt="${product.name} Thumbnail">
+                </div>
+            `).join('');
+
+            // Thumbnail navigation clicks
+            const thumbs = thumbsDiv.querySelectorAll('.thumb-item');
+            thumbs.forEach(t => {
+                t.addEventListener('click', () => {
+                    thumbs.forEach(x => x.classList.remove('active'));
+                    t.classList.add('active');
+                    mainImg.src = t.getAttribute('data-src');
+                });
+            });
+
+            // Quantity increments/decrements
+            const qtyInput = document.getElementById('qty-val');
+            const incBtn = document.getElementById('qty-inc');
+            const decBtn = document.getElementById('qty-dec');
+
+            incBtn.addEventListener('click', () => {
+                qtyInput.value = parseInt(qtyInput.value) + 1;
+            });
+
+            decBtn.addEventListener('click', () => {
+                const current = parseInt(qtyInput.value);
+                if (current > 1) {
+                    qtyInput.value = current - 1;
+                }
+            });
+
+            // Wishlist Toggle
+            const wishlistBtn = document.getElementById('detail-wishlist-btn');
+            const updateWishlistBtnIcon = () => {
+                const isWishlisted = Wishlist.hasItem(product.id);
+                const icon = wishlistBtn.querySelector('i');
+                if (isWishlisted) {
+                    wishlistBtn.style.backgroundColor = 'var(--accent-danger)';
+                    wishlistBtn.style.color = '#ffffff';
+                    wishlistBtn.style.borderColor = 'var(--accent-danger)';
+                    icon.className = 'fas fa-heart';
+                } else {
+                    wishlistBtn.style.backgroundColor = '';
+                    wishlistBtn.style.color = '';
+                    wishlistBtn.style.borderColor = '';
+                    icon.className = 'far fa-heart';
+                }
+            };
+
+            wishlistBtn.addEventListener('click', () => {
+                Wishlist.toggleItem(product.id);
+                updateWishlistBtnIcon();
+            });
+
+            updateWishlistBtnIcon();
+
+            // Cart Actions
+            document.getElementById('detail-add-cart-btn').addEventListener('click', () => {
+                Cart.addItem(product.id, parseInt(qtyInput.value));
+            });
+
+            document.getElementById('detail-buy-now-btn').addEventListener('click', () => {
+                Cart.addItem(product.id, parseInt(qtyInput.value), true);
+                window.location.href = 'checkout.html';
+            });
+
+            // Specifications layout rendering
+            const specsBody = document.getElementById('specs-table-body');
+            const specsEntries = Object.entries(product.specs);
+            if (specsEntries.length > 0) {
+                specsBody.innerHTML = specsEntries.map(([key, val]) => `
+                    <tr>
+                        <td>${key}</td>
+                        <td>${val}</td>
+                    </tr>
+                `).join('');
+            } else {
+                specsBody.innerHTML = '<tr><td colspan="2" class="text-center text-muted">No specifications registered for this item.</td></tr>';
+            }
+
+            // Reviews layout rendering
+            const reviewsDiv = document.getElementById('reviews-list-div');
+            if (product.reviews.length > 0) {
+                reviewsDiv.innerHTML = product.reviews.map(rev => `
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="review-user">${rev.user}</span>
+                            <div class="product-rating" style="margin-bottom: 0;">
+                                ${makeStarsHTML(rev.rating)}
+                            </div>
+                        </div>
+                        <p class="review-comment">"${rev.comment}"</p>
+                    </div>
+                `).join('');
+            } else {
+                reviewsDiv.innerHTML = '<p class="text-center text-muted" style="padding: 2rem 0;">No reviews yet. Be the first to buy and leave a review!</p>';
+            }
+
+            // Tab toggles behavior
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    tabBtns.forEach(x => x.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const tabId = btn.getAttribute('data-tab');
+                    document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+                    document.getElementById(`tab-${tabId}`).classList.add('active');
+                });
+            });
+
+            // Related products query (Same category, excludes current)
+            const relatedGrid = document.getElementById('related-products-grid');
+            const relatedList = getAllProducts()
+                .filter(p => p.category === product.category && p.id !== product.id)
+                .slice(0, 4);
+
+            if (relatedList.length > 0) {
+                relatedGrid.innerHTML = relatedList.map(p => {
+                    const isWishlisted = Wishlist.hasItem(p.id);
+                    const heartIcon = isWishlisted ? 'fas fa-heart' : 'far fa-heart';
+                    const wishlistClass = isWishlisted ? 'active' : '';
+
+                    return `
+                        <div class="product-card">
+                            <div class="product-img-wrapper">
+                                <a href="product.html?id=${p.id}">
+                                    <img src="${p.images[0]}" alt="${p.name}" loading="lazy">
+                                </a>
+                                <span class="product-card-badge badge badge-secondary">${p.category}</span>
+                                <button class="product-wishlist-btn ${wishlistClass}" data-id="${p.id}" title="Toggle Wishlist">
+                                    <i class="${heartIcon}"></i>
+                                </button>
+                            </div>
+                            <div class="product-card-content">
+                                <span class="product-card-category">${p.category}</span>
+                                <a href="product.html?id=${p.id}">
+                                    <h3 class="product-card-title">${p.name}</h3>
+                                </a>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(${p.reviewsCount})</span>
+                                </div>
+                                <div class="product-card-bottom">
+                                    <span class="product-card-price">$${p.price.toFixed(2)}</span>
+                                    <button class="product-add-cart-btn" data-id="${p.id}" title="Add to Cart" ${p.inStock ? '' : 'disabled style="cursor: not-allowed; opacity: 0.5;"'}>
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                // Bind actions for related items
+                const cartBtns = relatedGrid.querySelectorAll('.product-add-cart-btn');
+                cartBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = btn.getAttribute('data-id');
+                        Cart.addItem(id, 1);
+                    });
+                });
+
+                const wishlistBtns = relatedGrid.querySelectorAll('.product-wishlist-btn');
+                wishlistBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = btn.getAttribute('data-id');
+                        const isAdded = Wishlist.toggleItem(id);
+                        const icon = btn.querySelector('i');
+                        if (isAdded) {
+                            btn.classList.add('active');
+                            icon.className = 'fas fa-heart';
+                        } else {
+                            btn.classList.remove('active');
+                            icon.className = 'far fa-heart';
+                        }
+                    });
+                });
+            } else {
+                relatedGrid.innerHTML = '<div style="grid-column: 1 / -1;"><p class="text-center text-muted">No similar category items found.</p></div>';
+            }
+
+            // Sync wishlist actions back
+            window.addEventListener('wishlistUpdated', () => {
+                updateWishlistBtnIcon();
+            });
+        });
+    </script>
+</body>
+</html>

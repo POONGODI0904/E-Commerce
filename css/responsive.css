@@ -1,0 +1,166 @@
+/* ==========================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ========================================== */
+
+/* Large Desktops / Laptops (Default starts here) */
+@media (max-width: 1200px) {
+    :root {
+        --container-max-width: 1140px;
+    }
+}
+
+/* Medium Desktops / Tablets Landscape (max-width: 1024px) */
+@media (max-width: 1024px) {
+    :root {
+        --container-max-width: 960px;
+        --header-height: 70px;
+    }
+    
+    .section-padding {
+        padding: 4rem 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+    
+    /* Responsive changes for shop & product detail */
+    .shop-container {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .shop-sidebar {
+        position: fixed;
+        top: 0;
+        left: -320px;
+        width: 300px;
+        height: 100%;
+        background-color: var(--bg-secondary);
+        z-index: 1050;
+        padding: 2rem 1.5rem;
+        overflow-y: auto;
+        box-shadow: var(--shadow-xl);
+        transition: left var(--transition-normal);
+    }
+    
+    .shop-sidebar.active {
+        left: 0;
+    }
+    
+    .sidebar-close-btn {
+        display: block !important;
+    }
+    
+    .filter-mobile-toggle-btn {
+        display: inline-flex !important;
+    }
+}
+
+/* Tablets Portrait (max-width: 768px) */
+@media (max-width: 768px) {
+    :root {
+        --container-max-width: 720px;
+    }
+
+    .nav-menu {
+        display: none; /* Hide header menus, use drawer instead */
+    }
+
+    .menu-toggle {
+        display: block; /* Show hamburger button */
+    }
+
+    .header.scrolled {
+        height: 60px;
+    }
+    
+    /* Footer */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    /* Product details split screen */
+    .product-detail-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Cart page split */
+    .cart-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Checkout page split */
+    .checkout-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Dashboards */
+    .dashboard-layout {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .dashboard-tabs {
+        flex-direction: row !important;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 0.5rem;
+    }
+}
+
+/* Mobile Screens (max-width: 480px) */
+@media (max-width: 480px) {
+    :root {
+        --container-max-width: 100%;
+    }
+    
+    html {
+        font-size: 15px;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .nav-actions {
+        gap: 0.5rem;
+    }
+    
+    .action-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+    }
+    
+    .btn {
+        padding: 0.65rem 1.25rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Toast positions */
+    .toast-container {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+    }
+    
+    .toast {
+        min-width: auto;
+        width: 100%;
+    }
+}

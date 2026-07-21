@@ -1,0 +1,142 @@
+/* ==========================================
+   CHECKOUT PAGE SPECIFIC STYLES
+   ========================================== */
+
+/* Main Checkout Split Grid */
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+
+/* 1. Left Column: Details & Payment form */
+.checkout-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.checkout-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+}
+
+.checkout-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkout-card-title i {
+    color: var(--accent-primary);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Payment option buttons list */
+.payment-options-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.payment-option-item {
+    position: relative;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.payment-option-item input {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    accent-color: var(--accent-primary);
+}
+
+.payment-option-item i {
+    font-size: 1.75rem;
+    color: var(--text-secondary);
+    transition: color var(--transition-fast);
+}
+
+.payment-option-item span {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+/* Active Highlight */
+.payment-option-item:hover {
+    border-color: var(--border-color-hover);
+    background-color: var(--bg-primary);
+}
+
+.payment-option-item input:checked + i,
+.payment-option-item input:checked ~ span {
+    color: var(--accent-primary);
+}
+
+.payment-option-item:has(input:checked) {
+    border-color: var(--accent-primary);
+    background-color: rgba(99, 102, 241, 0.05);
+}
+
+/* Sub Forms styles */
+.payment-subform {
+    padding: 1.25rem;
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    margin-top: 1rem;
+    display: none;
+}
+
+/* 2. Right Column: Summary block */
+.checkout-summary-box {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    height: fit-content;
+    position: sticky;
+    top: calc(var(--header-height) + 20px);
+}
+
+.summary-product-item img {
+    border: 1px solid var(--border-color);
+}
+
+@media (max-width: 900px) {
+    .checkout-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
